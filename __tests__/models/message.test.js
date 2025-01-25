@@ -1,4 +1,4 @@
-const Message = require("../message");
+const Message = require("../../models/message");
 const { Client } = require("pg");
 
 // Mock the pg Client
