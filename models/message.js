@@ -17,10 +17,62 @@ const Message = {
 
     return result.rows[0];
   },
-  findAll: async () => {},
-  findById: async (id) => {},
-  delete: async (id) => {},
-  findByAuthorId: async (authorId) => {},
+  findAll: async () => {
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    await client.connect();
+
+    const query = "SELECT * FROM messages";
+    const result = await client.query(query);
+
+    await client.end();
+
+    return result.rows || [];
+  },
+  findById: async (id) => {
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    await client.connect();
+
+    const query = "SELECT * FROM messages WHERE id = $1";
+    const result = await client.query(query, [id]);
+
+    await client.end();
+
+    return result.rows[0] || null;
+  },
+  delete: async (id) => {
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    await client.connect();
+
+    const query = "DELETE FROM messages WHERE id = $1 RETURNING *";
+    const result = await client.query(query, [id]);
+
+    await client.end();
+
+    return result.rows[0] || null;
+  },
+  findByAuthorId: async (authorId) => {
+    const client = new Client({
+      connectionString: process.env.DATABASE_URL,
+    });
+
+    await client.connect();
+
+    const query = "SELECT * FROM messages WHERE author_id = $1";
+    const result = await client.query(query, [authorId]);
+
+    await client.end();
+
+    return result.rows || [];
+  },
 };
 
 module.exports = Message;
