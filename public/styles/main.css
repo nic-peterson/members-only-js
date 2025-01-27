@@ -269,3 +269,132 @@ nav p {
 .btn:hover {
   background-color: #0056b3;
 }
+
+.message-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.message-date {
+  margin: 0;
+}
+
+.hidden-info {
+  font-style: italic;
+  color: #999;
+  margin: 0;
+}
+
+/* Success messages */
+.success-messages {
+  color: #28a745;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #d4edda;
+  border: 1px solid #c8e6c9;
+  border-radius: 4px;
+}
+
+/* Header */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+}
+
+.site-title {
+  text-decoration: none;
+  color: white;
+}
+
+.user-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.welcome-text {
+  margin-right: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #34495e;
+}
+
+.role-badge {
+  font-size: 0.8em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  margin-left: 0.5rem;
+}
+
+.role-badge.admin {
+  background-color: #dc3545;
+  color: white;
+}
+
+.role-badge.member {
+  background-color: #28a745;
+  color: white;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-form {
+  margin-left: 1rem;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.create-message-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}

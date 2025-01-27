@@ -24,7 +24,14 @@ const Message = {
 
     await client.connect();
 
-    const query = "SELECT * FROM messages";
+    const query = `
+      SELECT 
+        messages.*,
+        users.username as author_name
+      FROM messages 
+      LEFT JOIN users ON messages.author_id = users.id 
+      ORDER BY created_at DESC
+    `;
     const result = await client.query(query);
 
     await client.end();

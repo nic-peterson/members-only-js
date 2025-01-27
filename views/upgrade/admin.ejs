@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<main>
+  <section class="hero">
+    <h2>Upgrade to Admin</h2>
+
+    <% if (locals.error) { %>
+    <div class="error-messages">
+      <div><%= error %></div>
+    </div>
+    <% } %>
+
+    <form method="POST" action="/upgrade/admin" class="upgrade-form">
+      <div class="form-group">
+        <label for="code">Admin Code:</label>
+        <input type="text" id="code" name="code" required />
+      </div>
+
+      <button type="submit" class="btn">Upgrade to Admin</button>
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

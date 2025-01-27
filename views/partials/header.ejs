@@ -8,7 +8,30 @@
   </head>
   <body>
     <header>
-      <h1>Members Only Club</h1>
+      <div class="header-content">
+        <h1><a href="/" class="site-title">Members Only Club</a></h1>
+        <nav class="user-nav">
+          <% if (locals.user) { %>
+          <span class="welcome-text">
+            Welcome, <%= user.first_name %>! <% if (user.is_admin) { %>
+            <span class="role-badge admin">Admin</span>
+            <% } else if (user.is_member) { %>
+            <span class="role-badge member">Member</span>
+            <% } %>
+          </span>
+          <a href="/messages/new" class="nav-link">Create Message</a>
+          <% if (!user.is_member) { %>
+          <a href="/upgrade/member" class="nav-link">Upgrade to Member</a>
+          <% } else if (!user.is_admin) { %>
+          <a href="/upgrade/admin" class="nav-link">Upgrade to Admin</a>
+          <% } %>
+          <a href="/logout" class="nav-link">Log Out</a>
+          <% } else { %>
+          <a href="/login" class="nav-link">Log In</a>
+          <a href="/signup" class="nav-link">Sign Up</a>
+          <% } %>
+        </nav>
+      </div>
     </header>
   </body>
 </html>
