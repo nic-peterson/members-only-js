@@ -12,6 +12,10 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching messages:", error);
+    req.flash(
+      "error",
+      "We're experiencing technical difficulties. Please try again later."
+    );
     res.render("index", {
       messages: [], // Fallback empty messages
       flashMessages: req.flash(),
