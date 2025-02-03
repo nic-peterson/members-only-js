@@ -11,7 +11,6 @@ router.post(
     failureFlash: true,
   }),
   (req, res) => {
-    console.log("Setting success flash message");
     req.flash("success", "Successfully logged in!");
     res.redirect("/");
   }
