@@ -6,7 +6,6 @@ const { ensureAdmin, ensureAuthenticated } = require("../middleware/auth");
 router.get("/", async (req, res) => {
   try {
     const messages = await Message.findAll();
-    console.log("Current user:", req.user); // Debug line
     res.render("index", {
       messages, // Keep existing messages functionality
       flashMessages: req.flash(), // Add flash messages separately
