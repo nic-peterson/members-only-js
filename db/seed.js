@@ -1,15 +1,10 @@
 require("dotenv").config();
-const { Client } = require("pg");
 const bcrypt = require("bcrypt");
+const pool = require("./pool");
 
 async function seedDatabase() {
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-  });
-
+  const client = await pool.connect();
   try {
-    await client.connect();
-
     // Generate hashed password
     const SALT_ROUNDS = 10;
     const password = "password123";
@@ -25,9 +20,7 @@ async function seedDatabase() {
       VALUES 
         ('John', 'Doe', 'john.doe@example.com', $1, true, true),
         ('Jane', 'Smith', 'jane.smith@example.com', $1, true, false),
-        ('Bob', 'Wilson', 'bob.wilson@example.com', $1, false, false),
-        ('Alice', 'Johnson', 'alice.johnson@example.com', $1, true, true),
-        ('Mike', 'Brown', 'mike.brown@example.com', $1, true, false)
+        ('Bob', 'Wilson', 'bob.wilson@example.com', $1, false, false)
       RETURNING id, first_name, last_name, username, is_member, is_admin;
     `,
       [hashedPassword]
@@ -41,27 +34,19 @@ async function seedDatabase() {
       `
       INSERT INTO messages (title, content, author_id) 
       VALUES 
-        ('First Post', 'Hello, this is my first post!', $1),
-        ('Welcome', 'Welcome to our platform!', $2),
-        ('Tech Discussion', 'What programming languages do you use?', $1),
-        ('Introduction', 'Hi everyone, I am new here', $3),
-        ('Question', 'How does this platform work?', $2),
-        ('Admin Update', 'Important platform updates coming soon!', $4),
-        ('Member Discussion', 'Members-only content discussion', $5)
+        ('Welcome', 'Welcome to Members Only!', $1),
+        ('Member Post', 'This is a member-only post', $2),
+        ('Public Post', 'This is visible to everyone', $3)
       RETURNING id, title, author_id;
     `,
-      [users[0].id, users[1].id, users[2].id, users[3].id, users[4].id]
+      [users[0].id, users[1].id, users[2].id]
     );
 
     console.log("Seeded messages:", messagesResult.rows);
-
-    console.log("Database seeding completed successfully!");
-  } catch (error) {
-    console.error("Error seeding database:", error);
   } finally {
-    await client.end();
+    client.release();
   }
 }
 
 // Run the seed function
-seedDatabase();
+seedDatabase().catch(console.error);

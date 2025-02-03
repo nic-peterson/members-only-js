@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Client } = require("pg");
+const pool = require("./pool");
 
 const users = `
 CREATE TABLE IF NOT EXISTS users (
@@ -26,18 +26,22 @@ CREATE TABLE IF NOT EXISTS messages (
 
 async function setup() {
   console.log("Setting up database...");
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-  });
+  const client = await pool.connect();
 
-  await client.connect();
-
-  await client.query(users);
-  await client.query(messages);
-
-  await client.end();
-
-  console.log("Database setup complete.");
+  try {
+    await client.query(users);
+    await client.query(messages);
+    console.log("Database setup complete.");
+  } catch (error) {
+    console.error("Setup error:", error);
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
-setup();
+if (require.main === module) {
+  setup().catch(console.error);
+}
+
+module.exports = setup;

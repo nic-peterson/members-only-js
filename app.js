@@ -9,6 +9,7 @@ const User = require("./models/user");
 const bcrypt = require("bcrypt");
 const port = process.env.PORT || 3000;
 const flash = require("express-flash");
+const setup = require("./db/setup");
 
 // Import routes
 const indexRouter = require("./routes/index");
@@ -40,6 +41,18 @@ app.use(flash()); // Add this before passport middleware
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
+});
+
+// Add right before your routes
+app.use(async (req, res, next) => {
+  try {
+    // Run database setup
+    await setup();
+    next();
+  } catch (error) {
+    console.error("Database setup error:", error);
+    next(error);
+  }
 });
 
 passport.use(
