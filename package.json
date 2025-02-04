@@ -11,7 +11,8 @@
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watch",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
