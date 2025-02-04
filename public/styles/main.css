@@ -170,6 +170,17 @@ footer {
     padding: 1rem;
   }
 
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .user-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .hero h2 {
     font-size: 2rem;
   }
@@ -181,6 +192,40 @@ footer {
   .messages,
   .features {
     padding: 1.5rem;
+  }
+
+  .message-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .create-message-form {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .message {
+    padding: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .delete-form {
+    margin: 0.5rem 0 0 0;
+  }
+
+  .message-header {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
 
